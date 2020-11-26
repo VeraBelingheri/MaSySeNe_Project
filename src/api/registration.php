@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-	require('db.php');
+	require('db/connection.php');
    
     if (isset($_REQUEST['name'])){
 		$name = stripslashes($_REQUEST['name']); 
