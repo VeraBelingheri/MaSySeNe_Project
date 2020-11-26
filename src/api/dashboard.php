@@ -1,7 +1,7 @@
 <?php
 
  
-require('db.php');
+require('db/connect.php');
 include("auth.php"); ?>
 <!DOCTYPE html>
 <html>
