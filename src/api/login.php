@@ -14,7 +14,6 @@
 	session_start();
     // If form submitted, insert values into the database.
     if (isset($_POST['email'])){
-		
 		$email = stripslashes($_REQUEST['email']); // removes backslashes
 		$email = mysqli_real_escape_string($con,$email); //escapes special characters in a string
 		$password = stripslashes($_REQUEST['password']);
