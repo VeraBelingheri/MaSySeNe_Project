@@ -67,15 +67,11 @@ include("auth.php");
 $query = "SELECT img, title, content FROM posts;";
 if($result = mysqli_query($con, $query)){
     if(mysqli_num_rows($result) > 0){
-        echo "<table>";
         while($row = mysqli_fetch_array($result)){
-            echo "<tr>";
-                echo "<td>" . $row['img'] . "</td>";
-                echo "<td>" . $row['title'] . "</td>";
-                echo "<td>" . $row['content'] . "</td>";
-            echo "</tr>";
+                echo "<span>" . $row['img'] . "</span>";
+                echo "<span>" . $row['title'] . "</span>";
+                echo "<span>" . $row['content'] . "<hr/></br/></span>";
         }
-        echo "</table>";
         // Free result set
         mysqli_free_result($result);
     } else{
