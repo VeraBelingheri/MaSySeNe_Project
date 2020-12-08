@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2020 at 07:57 PM
+-- Generation Time: Dec 08, 2020 at 09:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -29,19 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `postId` int(11) NOT NULL,
   `comment` text NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `comment`, `timestamp`) VALUES
-(1, 'Share', '2020-12-05 23:05:20'),
-(2, 'Share', '2020-12-05 23:05:49'),
-(3, 'Share', '2020-12-05 23:06:43'),
-(4, 'my comment', '2020-12-05 23:07:10');
 
 -- --------------------------------------------------------
 
@@ -51,21 +43,12 @@ INSERT INTO `comments` (`id`, `comment`, `timestamp`) VALUES
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `img` text NOT NULL,
   `title` text NOT NULL,
   `content` text NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `img`, `title`, `content`, `timestamp`) VALUES
-(6, 'image', 'First title ', 'first review', '2020-12-05 21:24:52'),
-(7, 'image', 'First title ', 'first review', '2020-12-05 22:08:58'),
-(8, 'immagine', 'nuovo titolo', 'nuova review', '2020-12-05 22:09:28'),
-(9, 'image2', 'Third title', 'nuova review', '2020-12-05 22:15:16');
 
 -- --------------------------------------------------------
 
@@ -97,13 +80,16 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `trn_date`) VALUES
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `posts_relation` (`postId`),
+  ADD KEY `users_relation` (`userId`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_relation` (`userId`);
 
 --
 -- Indexes for table `users`
@@ -125,13 +111,24 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `posts_relation` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `users_relation` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
