@@ -17,7 +17,8 @@ include("auth.php");
 <?php
 
     if (isset($_POST['post'])) {
-
+    
+    $userId =$_POST['userId']; 
     $img = $_POST['img'];
     $title = $_POST['title']; 
     $content = $_POST['content']; 
@@ -27,13 +28,14 @@ include("auth.php");
         die ('You have not inserted a title or a review!');
     }
     
-    $query = "INSERT INTO posts (img, title, content, timestamp) VALUES ('$img', '$title', '$content', '$timestamp');";
+    $query = "INSERT INTO posts (userId, img, title, content, timestamp) VALUES ('$userId', '$img', '$title', '$content', '$timestamp');";
     mysqli_query($con, $query);
 
     }
 
     if (isset($_POST['share'])) {
 
+        $userId =$_POST['userId']; 
         $comment = $_POST['comment'];
         $timestamp = date("Y-m-d H:i:s");
     
@@ -41,7 +43,7 @@ include("auth.php");
             die ('You have not inserted any comment!');
         }
         
-        $query = "INSERT INTO comments (comment, timestamp) VALUES ('$comment', '$timestamp');";
+        $query = "INSERT INTO comments (userId, comment, timestamp) VALUES ('$userId', '$comment', '$timestamp');";
         mysqli_query($con, $query);
     
         }
