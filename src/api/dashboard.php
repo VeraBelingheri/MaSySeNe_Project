@@ -47,6 +47,40 @@ include("auth.php");
         mysqli_query($con, $query);
     
         }
+    
+    $q1 = "SELECT * FROM posts JOIN users;";
+    $q2 = "SELECT * FROM comments JOIN users;";
+
+    $result1 = mysqli_query($con, $q1);
+    $result2 = mysqli_query($con, $q2);
+
+        while($row = mysql_fetch_assoc($result2)){
+
+            $comments_array=[];
+            $comments_array['$posts.id']=
+                ["comments"=>   ['userId' => $row['userId'],
+                                'name' => $row['name'],
+                                'comment' => $row['comment'],
+                                ]
+                ];
+        }
+
+        while($row = mysql_fetch_assoc($result1)){
+
+            $json_array = [];
+            $json_array['$posts.id'] = array(
+                'postId' => $row['Id'],
+                'postTitle' => $row['title'],
+                'postContent' => $row['content'],
+                'comment' => $comments_array['$posts.id'],
+                'user' => array(
+                    'userId' => $row['userId'],
+                    'name' => $row['name'],
+                )
+            );
+         }
+
+    echo json_encode($json_array);
 ?>
 
 <div class="form">
