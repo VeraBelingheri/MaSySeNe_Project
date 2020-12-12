@@ -34,6 +34,7 @@ include("auth.php");
 
     if (isset($_POST['share'])) {
 
+        $userId =$_POST['userId']; 
         $comment = $_POST['comment'];
         $timestamp = date("Y-m-d H:i:s");
     
@@ -41,17 +42,53 @@ include("auth.php");
             die ('You have not inserted any comment!');
         }
         
-        $query = "INSERT INTO comments (comment, timestamp) VALUES ('$comment', '$timestamp');";
+        $query = "INSERT INTO comments (userId, comment, timestamp) VALUES ('$userId', '$comment', '$timestamp');";
         mysqli_query($con, $query);
     
         }
+    
+    $q1 = "SELECT * FROM posts JOIN users;";
+    $q2 = "SELECT * FROM comments JOIN users;";
+
+    $result1 = mysqli_query($con, $q1);
+    $result2 = mysqli_query($con, $q2);
+
+        while($row = mysql_fetch_assoc($result2)){
+
+            $comments_array=[];
+            $comments_array['posts.id']= array(
+                'comment' => $row['comment'],
+                'user' => array(
+                    'userId' => $row['userId'],
+                    'name' => $row['name'],
+                )
+            );
+        }
+
+        while($row = mysql_fetch_assoc($result1)){
+
+            $json_array = [];
+            $json_array['posts.id'] = array(
+                'postId' => $row['Id'],
+                'postTitle' => $row['title'],
+                'postContent' => $row['content'],
+                'comment' => $comments_array['$posts.id'],
+                'user' => array(
+                    'userId' => $row['userId'],
+                    'name' => $row['name'],
+                )
+            );
+         }
+    
+    $array = var_dump($json_array);
+    echo json_encode($array);
 ?>
 
 <div class="form">
 <p>Dashboard for book reviews</p>
 
 
-<form action="dashboardInsecure.php" method="GET">
+<form action="dashboard.php" method="GET">
 <input type="text" name="img" id="img" placeholder="Image..."> <br>
 <input type="text" name="title" id="title" placeholder="Title..."> <br>
 <input type="text" name="content" id="content" placeholder="Review..."><br>

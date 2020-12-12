@@ -57,18 +57,19 @@ include("auth.php");
         while($row = mysql_fetch_assoc($result2)){
 
             $comments_array=[];
-            $comments_array['$posts.id']=
-                ["comments"=>   ['userId' => $row['userId'],
-                                'name' => $row['name'],
-                                'comment' => $row['comment'],
-                                ]
-                ];
+            $comments_array['posts.id']= array(
+                'comment' => $row['comment'],
+                'user' => array(
+                    'userId' => $row['userId'],
+                    'name' => $row['name'],
+                )
+            );
         }
 
         while($row = mysql_fetch_assoc($result1)){
 
             $json_array = [];
-            $json_array['$posts.id'] = array(
+            $json_array['posts.id'] = array(
                 'postId' => $row['Id'],
                 'postTitle' => $row['title'],
                 'postContent' => $row['content'],
@@ -79,8 +80,9 @@ include("auth.php");
                 )
             );
          }
-
-    echo json_encode($json_array);
+    
+    $array = var_dump($json_array);
+    echo json_encode($array);
 ?>
 
 <div class="form">
