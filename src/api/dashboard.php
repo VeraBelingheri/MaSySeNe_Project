@@ -54,10 +54,10 @@ include("auth.php");
     $result1 = mysqli_query($con, $q1);
     $result2 = mysqli_query($con, $q2);
 
+    $json_array = [];
+    $comments_array=[];
         while($row = mysql_fetch_assoc($result2)){
-
-            $comments_array=[];
-            $comments_array['posts.id']= array(
+            $comments_array[$row['postId']][]= array(
                 'comment' => $row['comment'],
                 'user' => array(
                     'userId' => $row['userId'],
@@ -68,21 +68,19 @@ include("auth.php");
 
         while($row = mysql_fetch_assoc($result1)){
 
-            $json_array = [];
-            $json_array['posts.id'] = array(
+            $json_array[] = array(
                 'postId' => $row['Id'],
                 'postTitle' => $row['title'],
                 'postContent' => $row['content'],
-                'comment' => $comments_array['$posts.id'],
+                'comment' => $comments_array[$row['Id']],
                 'user' => array(
                     'userId' => $row['userId'],
                     'name' => $row['name'],
                 )
             );
          }
-    
-    $array = var_dump($json_array);
-    echo json_encode($array);
+
+    echo json_encode($json_array);
 ?>
 
 <div class="form">
