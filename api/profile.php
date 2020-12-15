@@ -6,8 +6,15 @@ require('db/connect.php');
     if(isset($_POST['id'])){
         $id = mysqli_real_escape_string($con,$_POST['id']); 
         $array = array();
-        $sql = "SELECT * FROM users WHERE id='$id'";
-        $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+        $stmt = $con->prepare("SELECT * FROM users WHERE id= ?");
+		$stmt->bind_param("s", $id); 
+		$con->query("START TRANSACTION");
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
+		$con->query("COMMIT");
+
         while($row=mysqli_fetch_assoc($result))
         {
             $array['name'] = $row['name'];

@@ -11,8 +11,15 @@
 		$password = mysqli_real_escape_string($con,$password);
 		$passwordSecured=hash('SHA512',$password);
 		$trn_date = date("Y-m-d H:i:s");
-		$query = "INSERT into `users` (id,name, password, email, trn_date) VALUES ('$id', '$name', '$passwordSecured', '$email', '$trn_date')";
-		$result = mysqli_query($con,$query);
+
+		$stmt = $con->prepare("INSERT into `users` (id, name, password, email, trn_date) VALUES (?, ?, ?, ?, ?)");
+		$stmt->bind_param("sssss", $id, $name, $passwordSecured, $email, $trn_date); 
+		$con->query("START TRANSACTION");
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
+		$con->query("COMMIT");
+		
 		if($result){
 			$check = true;
 		}

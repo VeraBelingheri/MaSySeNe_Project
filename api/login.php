@@ -28,8 +28,14 @@
 		if($token!=false){
 			date_default_timezone_set('Europe/Rome');
 			$now=date('Y-m-d H:i:s');
-			$sql="INSERT INTO users_log(id_user,token,timestamp) VALUES('$idUser','$token','$now')";
-			mysqli_query($con, $sql) or die(mysqli_error($con));
+
+			$stmt = $con->prepare("INSERT INTO users_log(id_user,token,timestamp) VALUES(?, ?, ?)");
+			$stmt->bind_param("sss", $idUser, $token, $now); 
+			$con->query("START TRANSACTION");
+			$stmt->execute();
+			$stmt->close();
+			$con->query("COMMIT");
+
 		}
 	}
 	$obj=["idUser"=>$idUser,"token"=>$token,"name"=>$name];

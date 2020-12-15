@@ -7,8 +7,14 @@
         $title = mysqli_real_escape_string($con,$_POST['title']);
         $content = mysqli_real_escape_string($con,$_POST['content']);
         $timestamp = date("Y-m-d H:i:s");
-        $query = "INSERT INTO posts (id, userId, img, title, content, timestamp) VALUES ('$id','$userId', '$img', '$title', '$content', '$timestamp')";
-        mysqli_query($con, $query) or die(mysqli_error($con));
+
+        $stmt = $con->prepare("INSERT INTO posts (id, userId, img, title, content, timestamp) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $id, $userId, $img, $title, $content, $timestamp); 
+        $con->query("START TRANSACTION");
+		$stmt->execute();
+		$stmt->close();
+		$con->query("COMMIT");
+
     }
     echo true;
     mysqli_close($con);
