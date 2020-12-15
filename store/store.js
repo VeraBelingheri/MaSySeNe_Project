@@ -18,13 +18,7 @@ export const actions = {
     const params = new URLSearchParams();
     params.append("token", token);
     params.append("idUser", idUser);
-    let result;
-    if (state.isAdmin == false) {
-      result = await this.$axios.$post("storeowner/check-login.php", params);
-      commit("setIdStore", result);
-    } else {
-      result = await this.$axios.$post("staff/check-login.php", params);
-    }
+    const result = await this.$axios.$post("checkAuth.php", params);
     if (state.session == null) {
       commit("setSessionType", session);
     }
@@ -33,39 +27,45 @@ export const actions = {
   },
   async login({ commit }, { username, password, session }) {
     const params = new URLSearchParams();
-    params.append("username", username);
+    params.append("email", username);
     params.append("password", password);
-    const result = await this.$axios.$post("storeowner/login.php", params);
-    commit("setIdStore", result.idStore);
+    const result = await this.$axios.$post("login.php", params);
     if (result.token) {
       result.session = session;
-      commit("setSession", result);
-    } else if (result.hasPassword == 0) {
-      return "firstAcc";
-    }
-    return result.token;
-  },
-  async loginAdmin({ commit }, { username, password, session }) {
-    const params = new URLSearchParams();
-    params.append("username", username);
-    params.append("password", password);
-    const result = await this.$axios.$post("staff/login.php", params);
-    if (result.token) {
-      result.session = session;
-      commit("setAdminUser", result.idUser);
       commit("setSession", result);
     }
     return result.token;
   },
-  async changePassword({ commit, state }, { username, password }) {
+  async getPostsComments({ commit }) {
+    const result = await this.$axios.$get("get-posts-and-comments.php");
+    return result;
+  },
+  async addPost({ commit, state }, post) {
     const params = new URLSearchParams();
-    params.append("username", username);
+    params.append("userId", state.idUser);
+    params.append("id", post.id);
+    params.append("title", post.title);
+    params.append("content", post.content);
+    params.append("img", post.img);
+    const result = await this.$axios.$post("new-post.php", params);
+    return result;
+  },
+  async addComment({ commit, state }, comment) {
+    const params = new URLSearchParams();
+    params.append("userId", state.idUser);
+    params.append("id", comment.id);
+    params.append("postId", comment.postId);
+    params.append("comment", comment.content);
+    const result = await this.$axios.$post("new-comment.php", params);
+    return result;
+  },
+  async newUser({ commit, state }, { id, name, username, password }) {
+    const params = new URLSearchParams();
+    params.append("id", id);
+    params.append("name", name);
+    params.append("email", username);
     params.append("password", password);
-    const result = await this.$axios.$post(
-      "storeowner/change-password.php",
-      params
-    );
-    // commit("logout");
+    const result = await this.$axios.$post("registration.php", params);
     return result;
   }
 };
@@ -73,24 +73,17 @@ export const actions = {
 // mutations
 export const mutations = {
   logout(state) {
-    state.session.removeItem("iFixIdUser");
-    state.session.removeItem("iFixToken");
-    state.session.removeItem("idUser");
-    state.session.removeItem("idStore");
+    state.session.removeItem("socialBookIdUser");
+    state.session.removeItem("socialBookToken");
   },
   setSessionType(state, session) {
     state.session = session;
   },
   setSession(state, result) {
-    result.session.setItem("iFixIdUser", result.idUser);
-    result.session.setItem("iFixToken", result.token);
-    result.session.setItem("isAdmin", state.isAdmin);
+    result.session.setItem("socialBookIdUser", result.idUser);
+    result.session.setItem("socialBookToken", result.token);
   },
   setIdUser(state, idUser) {
     state.idUser = idUser;
-  },
-  setAdminUser(state, idUser) {
-    state.idUser = idUser;
-    state.isAdmin = true;
   }
 };

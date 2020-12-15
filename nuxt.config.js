@@ -20,7 +20,7 @@ export default {
   css: ["~assets/css/style.scss"],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ["~plugins/uuid.js"],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -37,7 +37,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: "http://localhost/sysnetworkproject/api/"
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {}

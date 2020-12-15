@@ -1,10 +1,13 @@
 <template>
   <div class="mt-5">
-    <b-field label="Commento">
-      <b-input v-model="comment" maxlength="500" type="textarea"></b-input>
+    <b-field label="Titolo">
+      <b-input v-model="post.title"></b-input>
+    </b-field>
+    <b-field label="Contenuto">
+      <b-input v-model="post.content" maxlength="500" type="textarea"></b-input>
     </b-field>
     <div class="buttons mt-5">
-      <b-button @click="$emit('save', comment)" type="is-success" expanded
+      <b-button @click="$emit('save', post)" type="is-success" expanded
         >Publish</b-button
       >
     </div>
@@ -20,13 +23,11 @@
 export default {
   data() {
     return {
-      comment: null
+      post: {
+        title: null,
+        content: null
+      }
     };
-  },
-  props: {
-    postId: {
-      type: String
-    }
   }
 };
 </script>

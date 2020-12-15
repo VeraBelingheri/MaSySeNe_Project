@@ -7,7 +7,7 @@
       <p>
         {{ name }}
         <br />
-        <a href="#" @click.prevent="logout()">Logout</a>
+        <b-button size="is-small" @click="logout()">Logout</b-button>
       </p>
     </div>
   </div>
@@ -19,6 +19,12 @@ export default {
     return {
       name: "Alessio Crea"
     };
+  },
+  methods: {
+    async logout() {
+      this.$store.commit("store/logout");
+      this.$router.push("login");
+    }
   }
 };
 </script>
