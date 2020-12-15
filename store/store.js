@@ -1,5 +1,6 @@
 export const state = () => ({
   session: null,
+  name: "",
   idUser: null
 });
 
@@ -33,6 +34,7 @@ export const actions = {
     if (result.token) {
       result.session = session;
       commit("setSession", result);
+      commit("setUserName", result.name);
     }
     return result.token;
   },
@@ -85,5 +87,8 @@ export const mutations = {
   },
   setIdUser(state, idUser) {
     state.idUser = idUser;
+  },
+  setUserName(state, name) {
+    state.name = name;
   }
 };

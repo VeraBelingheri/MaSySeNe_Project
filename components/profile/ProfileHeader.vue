@@ -5,7 +5,7 @@
         <img src="~assets/img/user-g.png" alt="" />
       </div>
       <p>
-        {{ name }}
+        {{ $store.state.store.name }}
         <br />
         <b-button size="is-small" @click="logout()">Logout</b-button>
       </p>
@@ -16,9 +16,7 @@
 <script>
 export default {
   data() {
-    return {
-      name: "Alessio Crea"
-    };
+    return {};
   },
   methods: {
     async logout() {
