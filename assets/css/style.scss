@@ -1,0 +1,101 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+@import "margin-padding.scss";
+
+// Set your colors
+$primary: #ef746f;
+$primary-invert: findColorInvert($primary);
+$info: #2c6bf7;
+$info-invert: findColorInvert($info);
+$cta: #fd8e26;
+$cta-invert: findColorInvert($cta);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  "white": (
+    $white,
+    $black
+  ),
+  "black": (
+    $black,
+    $white
+  ),
+  "light": (
+    $light,
+    $light-invert
+  ),
+  "dark": (
+    $dark,
+    $dark-invert
+  ),
+  "primary": (
+    $primary,
+    $primary-invert
+  ),
+  "info": (
+    $info,
+    $info-invert
+  ),
+  "success": (
+    $success,
+    $success-invert
+  ),
+  "warning": (
+    $warning,
+    $warning-invert
+  ),
+  "danger": (
+    $danger,
+    $danger-invert
+  ),
+  "cta": (
+    $cta,
+    $cta-invert
+  )
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+$table-sticky-header-height: 50vh;
+
+.stats-table table thead {
+  text-align: center;
+  background-color: $primary !important;
+}
+
+.stats-table table thead th {
+  color: white;
+  background-color: $primary !important;
+}
+
+.stats-table:first-child {
+  height: 50vh !important;
+}
+
+.is-sticky-column-one {
+  background: $primary !important;
+  color: white !important;
+}
+
+// .custom-timepicker {
+//   width: 5rem !important;
+// }
+
+@import url("https://fonts.googleapis.com/css2?family=Pavanam&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+
+html,
+body,
+div,
+p,
+a {
+  font-family: "Noto Sans JP", sans-serif;
+  // font-family: 'Pavanam', sans-serif;
+}
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
