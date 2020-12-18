@@ -26,7 +26,7 @@
 		}
 	}
 	$obj=["idUser"=>$idUser,"token"=>$token,"name"=>$name];
-	header('Content-Type: application/json');
+	// header('Content-Type: application/json');
 
 	echo json_encode($obj);
 	mysqli_close($con);

