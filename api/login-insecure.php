@@ -3,13 +3,13 @@
 	require('db/connect.php');
 	$token = false;
 	if(isset($_POST['email'])){
-		$email = $_POST['email']; // removes backslashes
+		$email = $_POST['email'];
 		$password =$_POST['password'];
-		$password=hash('SHA512',$password);
+		// $password=hash('SHA512',$password);
 		$query = "SELECT id, name FROM `users` WHERE email='$email' and password='$password'";
 		$result = mysqli_query($con,$query) or die(mysql_error());
 		$rows = mysqli_num_rows($result);
-		if($rows==1){
+		if($rows>0){
 			while($row = mysqli_fetch_assoc($result)){
 				$idUser = $row["id"];
 				$name = $row["name"];

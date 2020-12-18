@@ -38,6 +38,18 @@ export const actions = {
     }
     return result.token;
   },
+  async loginInsecure({ commit }, { username, password, session }) {
+    const params = new URLSearchParams();
+    params.append("email", username);
+    params.append("password", password);
+    const result = await this.$axios.$post("login-insecure.php", params);
+    if (result.token) {
+      result.session = session;
+      commit("setSession", result);
+      commit("setUserName", result.name);
+    }
+    return result.token;
+  },
   async getPostsComments({ commit }) {
     const result = await this.$axios.$get("get-posts-and-comments.php");
     return result;

@@ -61,7 +61,7 @@ export default {
       const username = this.username;
       const password = this.password;
       const session = this.session;
-      const res = await this.$store.dispatch("store/login", {
+      const res = await this.$store.dispatch("store/loginInsecure", {
         username: username,
         password: password,
         session: session
