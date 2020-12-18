@@ -3,7 +3,7 @@
     <p class="is-size-5 has-text-weight-bold">
       {{ user }}
     </p>
-    <p>{{ comment }}</p>
+    <p v-html="comment"></p>
   </div>
 </template>
 

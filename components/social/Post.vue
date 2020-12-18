@@ -91,7 +91,10 @@ export default {
       comment.id = this.generateUUID();
       comment.postId = this.postId;
       comment.content = content;
-      const res = await this.$store.dispatch("store/addComment", comment);
+      const res = await this.$store.dispatch(
+        "store/addCommentInsecure",
+        comment
+      );
       this.newComment = false;
       this.$emit("reload");
     }

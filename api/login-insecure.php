@@ -5,6 +5,7 @@
 	if(isset($_POST['email'])){
 		$email = $_POST['email'];
 		$password =$_POST['password'];
+		
 		// $password=hash('SHA512',$password);
 		$query = "SELECT id, name FROM `users` WHERE email='$email' and password='$password'";
 		$result = mysqli_query($con,$query) or die(mysql_error());
@@ -16,6 +17,7 @@
 			}
 			$token=uniqid('', true);
 		}
+		setcookie('idUser',$idUser,time()+3600,"/");
 		if($token!=false){
 			date_default_timezone_set('Europe/Rome');
 			$now=date('Y-m-d H:i:s');
@@ -24,6 +26,8 @@
 		}
 	}
 	$obj=["idUser"=>$idUser,"token"=>$token,"name"=>$name];
+	header('Content-Type: application/json');
+
 	echo json_encode($obj);
 	mysqli_close($con);
 ?>

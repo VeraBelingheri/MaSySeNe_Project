@@ -42,7 +42,9 @@ export const actions = {
     const params = new URLSearchParams();
     params.append("email", username);
     params.append("password", password);
-    const result = await this.$axios.$post("login-insecure.php", params);
+    const result = await this.$axios.$post("login-insecure.php", params, {
+      withCredentials: true
+    });
     if (result.token) {
       result.session = session;
       commit("setSession", result);
@@ -64,6 +66,20 @@ export const actions = {
     const result = await this.$axios.$post("new-post.php", params);
     return result;
   },
+  async addPostInsecure({ commit, state }, post) {
+    const string =
+      "?id=" +
+      post.id +
+      "&title=" +
+      post.title +
+      "&content=" +
+      post.content +
+      "&img=null";
+    const result = await this.$axios.$get("new-post-insecure.php" + string, {
+      withCredentials: true
+    });
+    return result;
+  },
   async addComment({ commit, state }, comment) {
     const params = new URLSearchParams();
     params.append("userId", state.idUser);
@@ -71,6 +87,15 @@ export const actions = {
     params.append("postId", comment.postId);
     params.append("comment", comment.content);
     const result = await this.$axios.$post("new-comment.php", params);
+    return result;
+  },
+  async addCommentInsecure({ commit, state }, comment) {
+    const params = new URLSearchParams();
+    params.append("userId", state.idUser);
+    params.append("id", comment.id);
+    params.append("postId", comment.postId);
+    params.append("comment", comment.content);
+    const result = await this.$axios.$post("new-comment-insecure.php", params);
     return result;
   },
   async newUser({ commit, state }, { id, name, username, password }) {

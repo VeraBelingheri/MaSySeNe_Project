@@ -47,7 +47,7 @@ export default {
       this.newPost = false;
       post.id = this.generateUUID();
       post.img = null;
-      const res = await this.$store.dispatch("store/addPost", post);
+      const res = await this.$store.dispatch("store/addPostInsecure", post);
       await this.getPosts();
     },
     async getPosts() {
