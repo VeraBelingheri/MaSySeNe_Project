@@ -3,10 +3,8 @@
 	require('db/connect.php');
 	$token = false;
 	if(isset($_POST['email'])){
-		$email = stripslashes($_POST['email']); // removes backslashes
-		$email = mysqli_real_escape_string($con,$email); //escapes special characters in a string
-		$password = stripslashes($_POST['password']);
-		$password = mysqli_real_escape_string($con,$password);
+		$email = $_POST['email']; // removes backslashes
+		$password =$_POST['password'];
 		$password=hash('SHA512',$password);
 		$query = "SELECT id, name FROM `users` WHERE email='$email' and password='$password'";
 		$result = mysqli_query($con,$query) or die(mysql_error());
