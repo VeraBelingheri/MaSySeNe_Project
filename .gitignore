@@ -70,7 +70,7 @@ typings/
 
 # Nuxt generate
 dist
-project-team-secure
+# project-team-secure
 project-team-insecure
 
 # vuepress build output
