@@ -21,7 +21,7 @@
 		if($rows==1){
 			while($row = mysqli_fetch_assoc($result)){
 				$idUser = $row["id"];
-				$name = $row["name"];
+				$name = stripslashes($row["name"]);
 			}
 			$token=uniqid('', true);
 		}

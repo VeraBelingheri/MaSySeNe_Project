@@ -12,10 +12,10 @@
         while($row = mysqli_fetch_assoc($result2)){
             $comments_array[$row['postId']][]= array(
                 'id' => $row['id'],
-                'comment' => $row['comment'],
+                'comment' => stripslashes($row['comment']),
                 'user' => array(
                     'userId' => $row['userId'],
-                    'name' => $row['name'],
+                    'name' => stripslashes($row['name']),
                 )
             );
         }
@@ -28,13 +28,13 @@
 
             $json_array[] = array(
                 'postId' => $row['id'],
-                'postTitle' => $row['title'],
-                'postContent' => $row['content'],
+                'postTitle' => stripslashes($row['title']),
+                'postContent' => stripslashes($row['content']),
                 'timestamp' => $row['timestamp'],
                 'comments' =>  $comments,
                 'user' => array(
                     'userId' => $row['userId'],
-                    'name' => $row['name'],
+                    'name' => stripslashes($row['name']),
                 )
             );
          }
