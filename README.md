@@ -8,7 +8,7 @@ Management of System Security and Networks project 2020 - 2021
 2. Use WAMP/XAMPP or similiar
 3. Move the directory "project-team-insecure" inside the localhost root (so that you have http://localhost/project-team-insecure/)
 4. Create a folder in localhost named "MaSySeNe_Project"
-5. Move the directory "api" inside the last folder created
+5. Move the directory "api" inside the folder created in the 4th point
 6. Access http://localhost/project-team-insecure/
 
 # HOW TO - "ATTACKS"
