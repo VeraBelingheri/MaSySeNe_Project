@@ -5,8 +5,7 @@ export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: "static",
   generate: {
-    // dir: "project-team-secure"
-    dir: "project-team-insecure"
+    dir: "project-team-secure"
   },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -47,7 +46,6 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
   router: {
-    // base: "/project-team-secure/"
-    base: "/project-team-insecure/"
+    base: "/project-team-secure/"
   }
 };
