@@ -18,7 +18,6 @@
 		}
 		setcookie('idUser',$idUser,time()+3600,"/");
 		if($token!=false){
-			date_default_timezone_set('Europe/Rome');
 			$now=date('Y-m-d H:i:s');
 			$sql="INSERT INTO users_log(id_user,token,timestamp) VALUES('$idUser','$token','$now')";
 			mysqli_query($con, $sql) or die(mysqli_error($con));

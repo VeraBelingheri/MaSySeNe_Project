@@ -1,6 +1,6 @@
 <?php
     require('db/connect.php');
-    if(isset($_GET['id'])){
+    if(isset($_COOKIE["idUser"])){
         $id = $_GET['id'];
         $idUser = $_COOKIE["idUser"];
         $img = $_GET['img'];
