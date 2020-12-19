@@ -28,7 +28,7 @@ a' OR 'abc'='abc
 
 ## CSRF
 
-### WITH A SESSION ON http://localhost/project-team-insecure/ OPEN
+### WITH A SESSION ACTIVE ON http://localhost/project-team-insecure/ OPEN
 
 Go to http://trasformadigitale.it/attacco-csrf.html and reload http://localhost/project-team-insecure/ to see the attack succeeded
 
