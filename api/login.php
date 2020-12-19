@@ -26,7 +26,6 @@
 			$token=uniqid('', true);
 		}
 		if($token!=false){
-			date_default_timezone_set('Europe/Rome');
 			$now=date('Y-m-d H:i:s');
 
 			$stmt = $con->prepare("INSERT INTO users_log(id_user,token,timestamp) VALUES(?, ?, ?)");

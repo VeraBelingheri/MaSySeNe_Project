@@ -24,6 +24,7 @@ export const actions = {
       commit("setSessionType", session);
     }
     commit("setIdUser", idUser);
+    commit("setUserName", state.session.getItem("socialBookName"));
     return result;
   },
   async login({ commit }, { username, password, session }) {
@@ -77,6 +78,7 @@ export const mutations = {
   logout(state) {
     state.session.removeItem("socialBookIdUser");
     state.session.removeItem("socialBookToken");
+    state.session.removeItem("socialBookName");
   },
   setSessionType(state, session) {
     state.session = session;
@@ -84,6 +86,7 @@ export const mutations = {
   setSession(state, result) {
     result.session.setItem("socialBookIdUser", result.idUser);
     result.session.setItem("socialBookToken", result.token);
+    result.session.setItem("socialBookName", result.name);
   },
   setIdUser(state, idUser) {
     state.idUser = idUser;
