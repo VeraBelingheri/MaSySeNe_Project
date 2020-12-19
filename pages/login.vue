@@ -49,7 +49,7 @@ export default {
     },
     async newUser(name, username, password) {
       const id = this.generateUUID();
-      const res = await this.$store.dispatch("store/newUser", {
+      const res = await this.$store.dispatch("store/newUserInsecure", {
         id: id,
         name: name,
         username: username,

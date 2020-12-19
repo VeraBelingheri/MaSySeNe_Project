@@ -106,6 +106,15 @@ export const actions = {
     params.append("password", password);
     const result = await this.$axios.$post("registration.php", params);
     return result;
+  },
+  async newUserInsecure({ commit, state }, { id, name, username, password }) {
+    const params = new URLSearchParams();
+    params.append("id", id);
+    params.append("name", name);
+    params.append("email", username);
+    params.append("password", password);
+    const result = await this.$axios.$post("registration-no-sha.php", params);
+    return result;
   }
 };
 

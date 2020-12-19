@@ -9,11 +9,10 @@
 		$email = mysqli_real_escape_string($con,$email);
 		$password = stripslashes($_POST['password']);
 		$password = mysqli_real_escape_string($con,$password);
-		$passwordSecured=hash('SHA512',$password);
 		$trn_date = date("Y-m-d H:i:s");
 
 		$stmt = $con->prepare("INSERT into `users` (id, name, password, email, trn_date) VALUES (?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssss", $id, $name, $passwordSecured, $email, $trn_date); 
+		$stmt->bind_param("sssss", $id, $name, $password, $email, $trn_date); 
 		$con->query("START TRANSACTION");
 		$stmt->execute();
 		$result = $stmt->get_result();

@@ -5,7 +5,6 @@
 	if(isset($_POST['email'])){
 		$email = $_POST['email'];
 		$password =$_POST['password'];
-		
 		// $password=hash('SHA512',$password);
 		$query = "SELECT id, name FROM `users` WHERE email='$email' and password='$password'";
 		$result = mysqli_query($con,$query) or die(mysql_error());
