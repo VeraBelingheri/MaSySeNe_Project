@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Dic 15, 2020 alle 16:36
+-- Creato il: Dic 19, 2020 alle 17:47
 -- Versione del server: 5.7.31
 -- Versione PHP: 7.3.21
 
@@ -70,17 +70,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `trn_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dump dei dati per la tabella `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `trn_date`) VALUES
-('2128b3ee-ca65-4fb4-a064-7be0f6afc492', 'Alessio', 'alessio@test.it', '40ac753d50a4919bbc11ffa414293491515518aade843d71369a25774699348e3cc412a4a6f7dd7e04373d9c607429a0fdb694f739e70c4a3ab8e610378b76d2', '2020-12-15 02:05:27'),
-('5124a063-89ed-4b06-af03-99ed96886483', 'Moreline', 'moreline@test.it', '40ac753d50a4919bbc11ffa414293491515518aade843d71369a25774699348e3cc412a4a6f7dd7e04373d9c607429a0fdb694f739e70c4a3ab8e610378b76d2', '2020-12-02 22:17:52'),
-('b009991b-7444-4d57-8b38-15544ee664d1', 'Vera', 'vera@test.it', '40ac753d50a4919bbc11ffa414293491515518aade843d71369a25774699348e3cc412a4a6f7dd7e04373d9c607429a0fdb694f739e70c4a3ab8e610378b76d2', '2020-12-02 18:03:34');
 
 -- --------------------------------------------------------
 
