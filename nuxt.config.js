@@ -38,7 +38,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: "http://localhost/sysnetworkproject/api/"
+    baseURL: "http://localhost/MaSySeNe_Project/api/"
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
