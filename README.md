@@ -2,6 +2,8 @@
 
 Management of System Security and Networks project 2020 - 2021
 
+## NOTE: this is the secure application. If you want the insecure application, please switch to the INSECURE branch
+
 # HOW TO
 
 1. Download the repository (branch MAIN)
